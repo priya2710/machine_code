@@ -2,7 +2,7 @@
 import time
 import threading
 import logging
-from enums.order_status import OrderStatus
+from rich.logging import RichHandler
 from enums.driver_status import DriverStatus
 from repositories.in_memory_repository import InMemoryRepository
 from services.customer_service import CustomerService
@@ -16,8 +16,23 @@ from services.scheduler_service import OrderExpirationScheduler
 from enums.payment_mode import PaymentMode
 from enums.item_type import ItemType
 from strategies.matching_strategy import FirstAvailableMatchingStrategy
+from rich.logging import RichHandler
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    datefmt="[%X]",
+    handlers=[
+        RichHandler(
+            rich_tracebacks=True,
+            show_time=True,
+            show_level=True,
+            show_path=True,
+        )
+    ],
+    force=True,
+)
+
 logger = logging.getLogger(__name__)
 
 def main():
