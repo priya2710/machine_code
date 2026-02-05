@@ -22,14 +22,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(message)s",
     datefmt="[%X]",
-    handlers=[
-        RichHandler(
-            rich_tracebacks=True,
-            show_time=True,
-            show_level=True,
-            show_path=True,
-        )
-    ],
+    handlers=[RichHandler()],
     force=True,
 )
 
