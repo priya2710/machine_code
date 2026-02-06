@@ -96,6 +96,7 @@ def main():
         else:
             logger.error("FAILURE: Order O3 not assigned correctly.")
 
+        input("Press ENTER to continue...")
         logger.info("--- Cancellation Test ---")
         order_service.cancel_order("O3")
         o3 = order_service.get_order("O3")
@@ -115,11 +116,13 @@ def main():
         busy_drivers = [d.id for d in driver_service.get_all_drivers() if d.status == DriverStatus.BUSY]
         logger.info(f"Busy Drivers: {len(busy_drivers)}/2")
         
+        input("Press ENTER to continue...")
         logger.info("--- Rating Demo ---")
         driver_service.rate_driver("D1", 5)
         top_drivers = dashboard_service.get_top_drivers(by_rating=True)
         logger.info(f"Top Driver: {top_drivers[0].name} ({top_drivers[0].rating} stars)")
 
+        input("Press ENTER to continue...")
         logger.info("--- Order Expiration Test ---")
         # Create an old order to test scheduler
         old_order = order_service.create_order("O_OLD", c1.id, ItemType.CLOTHING)
@@ -132,6 +135,7 @@ def main():
         old_order = order_service.get_order("O_OLD")
         logger.info(f"Old Order Status: {old_order.status}")
 
+        input("Press ENTER to continue...")
         logger.info("--- Guardrail Test ---")
         try:
             logger.info("Attempting to create order with 100kg weight (Max 50kg)...")
@@ -144,7 +148,8 @@ def main():
             order_service.create_order("O_FAIL_Q", c1.id, ItemType.FOOD, quantity=20)
         except ValueError as e:
             logger.info(f"Caught expected guardrail error: {e}")
-
+            
+        input("Press ENTER to continue...")
         logger.info("--- Payment Demo ---")
         order_service.process_order_payment("O1", 150.00, PaymentMode.UPI)
 

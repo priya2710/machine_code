@@ -11,7 +11,6 @@ from repositories.in_memory_repository import InMemoryRepository
 from services.interfaces import IOrderService, IPaymentService
 from services.assignment_service import AssignmentService
 from services.notification_service import NotificationService
-from services.payment_service import PaymentService
 from services.customer_service import CustomerService
 from exceptions.custom_exceptions import (
     OrderNotFoundException,
